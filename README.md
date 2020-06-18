@@ -10,6 +10,7 @@ I want to try to explore the possibility to architect and establish a general pu
 ## What I am proposing?
 I am proposing a way to achieve homeostasis self-adaptation for software systems via metabolism.
 > Metabolism consists of the sum of anabolism (construction) and catabolism (destruction) with the release of energy, and achieving a fairly constant internal environment (homeostasis).
+
 In specific, I am proposing:
 - the architecture of a system is not static, but of a number of variations; in Component-and-Connector views:
   - components are static
