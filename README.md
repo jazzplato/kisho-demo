@@ -33,7 +33,7 @@ It is named after a great Japanese architect, [Kisho Kurokawa](https://en.wikipe
 
 ## What is different from the mainstream self-adaptation?
 ### Model-based VS. Rule-based
-Unlike most of the self-adaptation, such as [kubernetes](https://kubernetes.io/) for containers and [AWS](https://aws.amazon.com/) for cloud instances, of which the self-adapation is rule-based, this research focus on the model-based self-adapation. It has the following highlights:
+Unlike most of the self-adaptation, such as [kubernetes](https://kubernetes.io/) for containers and [AWS](https://aws.amazon.com/) for cloud instances, of which the self-adapation is rule-based, this research focus on the model-based self-adaptation. It has the following highlights:
 - use state machines (or Markov Decision Process) to represent system states
 - use formal methods for analysis
 - have a architecture model as the common knowledge
