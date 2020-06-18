@@ -33,7 +33,7 @@ It is named after a great Japanese architect, [Kisho Kurokawa](https://en.wikipe
 
 ## What is different from the mainstream self-adaptation?
 ### Model-based VS. Rule-based
-Unlike most of the self-adaptation, such as [kubernetes](https://kubernetes.io/) for containers and [AWS](https://aws.amazon.com/) for cloud instances, of which the self-adapation is rule-based, this research focus on the model-based self-adaptation. It has the following highlights:
+Unlike most of the self-adaptation, such as [kubernetes](https://kubernetes.io/) for containers and [AWS](https://aws.amazon.com/) for cloud instances, of which the self-adaptation is rule-based, this research focus on the model-based self-adaptation. It has the following highlights:
 - use state machines (or Markov Decision Process) to represent system states
 - use formal methods for analysis
 - have a architecture model as the common knowledge
@@ -42,4 +42,4 @@ Unlike most of the self-adaptation, such as [kubernetes](https://kubernetes.io/)
 Due to the rule-based nature, most of the current self-adaptation is reactive, where the response time (latency) can be critical to the success of the adaptation. There is another way out actually: to do the self-adaptation proactively, aka. to achieve homeostasis of the systems. This requires analysis and planning in advance.
 
 ## What are the quality attributes on the stake?
-Simply speaking, **anything**. Currently, the mainstream self-adapation only can address a handful of quality attributes, like costs(e.g. scale in), availability (e.g. roll-back), performance like throughput (e.g. scale out). However, many other quality attributes, like reliability, safety, security, etc. I believe it is possible to incorporate those quality attributes in the on-the-fly in the self-adaptation processes.
+Simply speaking, **anything**. Currently, the mainstream self-adaptation only can address a handful of quality attributes, like costs(e.g. scale in), availability (e.g. roll-back), performance like throughput (e.g. scale out). However, many other quality attributes, like reliability, safety, security, etc. I believe it is possible to incorporate those quality attributes in the on-the-fly in the self-adaptation processes.
