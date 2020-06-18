@@ -5,7 +5,7 @@ An experiment and a demo for metabolic homeostasis self-adaptation systems.
 It is for my independent study on the architectural-based self-adaptation system, under the supervision of [Prof. David Garlan](https://www.cs.cmu.edu/~garlan/) starting from the summer, 2020. Most of the research materials and inspirations are from the [CMU ABLE Group](http://www.cs.cmu.edu/~able/).
 
 ## What I want to achieve?
-I want to try to explore the possibility to architect and establish a general purpose system with certain level of homeostasis self-adaptation capability. In specific, such self-adapation include more than auto-scaling and service recovery (e.g. service rebooting and auto roll-back), but more on the architectural changes, like dynamically changing sync api dependencies to async, adding message queues to pass-through load balancers, etc. Of course, the keywords for such self-adpation tactics are **dynamic** and **safe**.
+I want to try to explore the possibility to architect and establish a general purpose system with certain level of homeostasis self-adaptation capability. In specific, such self-adaptation include more than auto-scaling and service recovery (e.g. service rebooting and auto roll-back), but more on the architectural changes, like dynamically changing sync api dependencies to async, adding message queues to pass-through load balancers, etc. Of course, the keywords for such self-adaptation tactics are **dynamic** and **safe**.
 
 ## What I am proposing?
 I am proposing a way to achieve homeostasis self-adaptation for software systems via metabolism.
