@@ -12,3 +12,6 @@
 
 # MacOS .DS_Store
 **/.DS_Store
+
+## django db migrations
+**/migrations
