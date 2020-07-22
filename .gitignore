@@ -1,0 +1,14 @@
+# python3 cache
+**/__pycache__
+
+# virtualenv
+**/env
+
+# ansible inventory
+**/inventory
+
+# vscode config
+**/.vscode
+
+# MacOS .DS_Store
+**/.DS_Store
