@@ -1,0 +1,16 @@
+[all:children]
+k8s_master
+k8s_worker
+
+[all:vars]
+ansible_user = 
+k8s_user = kisho
+
+[k8s_master]
+kisho-master.andrew.cmu.edu
+
+[k8s_worker]
+kisho-worker.andrew.cmu.edu
+
+[k8s_worker:vars]
+k8s_role = worker

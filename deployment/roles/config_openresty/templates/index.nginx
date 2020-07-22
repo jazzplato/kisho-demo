@@ -1,0 +1,72 @@
+upstream pss {
+    server localhost:{{ port_pss }};
+}
+
+upstream grafana {
+    server localhost:{{ port_grafana }};
+}
+
+server {
+    listen              80;
+    resolver            8.8.8.8;
+    server_name         {{ hostname }};
+
+    # log config
+    access_log          /var/log/openresty/{{ hostname }}/access.log;
+    error_log           /var/log/openresty/{{ hostname }}/error.log;
+
+    # # default redirection
+    # location / {
+    #     return 301 /grafana;
+    # }
+
+    location /sqlsmith/results {
+        alias /var/www/sqlsmith/results;
+        autoindex on;
+    }
+
+    location /sqlsmith/logs {
+        alias /var/www/sqlsmith/logs;
+        autoindex on;
+        types {
+            text/plain log csv;
+        }
+    }
+
+    location /sqlancer/logs {
+        alias /var/www/sqlancer/logs;
+        autoindex on;
+        types {
+            text/plain log csv;
+        }
+    }
+
+    location /static {
+        alias /data/static;
+        autoindex on;
+    }
+
+    # k8s: django api of the performance storage service
+    location /performance-results/ {
+        proxy_pass_header   Set-Cookie;
+
+        proxy_set_header    Host               $host;
+        proxy_set_header    X-Real-IP          $remote_addr;
+        proxy_set_header    X-Forwarded-Proto  $scheme;
+        proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
+
+        proxy_pass http://pss/performance-results/;
+    }
+
+    # k8s: grafana service
+    location /grafana/ {
+        proxy_pass_header   Set-Cookie;
+        
+        proxy_set_header    Host               $host;
+        proxy_set_header    X-Real-IP          $remote_addr;
+        proxy_set_header    X-Forwarded-Proto  $scheme;
+        proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
+
+        proxy_pass http://grafana/;
+    }
+}

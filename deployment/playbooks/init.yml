@@ -1,0 +1,8 @@
+---
+
+- name: init server
+  hosts: "{{ env }}"
+  roles:
+    - install_basics
+    - install_docker
+    - install_k8s
