@@ -1,20 +1,21 @@
 import csv
 
-input_file = 'movies.csv'
-output_file = 'output.csv'
-cols_to_remove = range(3, 11)  # Column indexes to be removed (starts at 0)
+FILE_INPUT = 'raw_movies.csv'
+FILE_OUTPUT = 'movies.csv'
 
-cols_to_remove = sorted(
-    cols_to_remove, reverse=True)  # Reverse so we remove from the end first
-row_count = 0  # Current amount of rows processed
+cols_to_remove = sorted(range(3, 11), reverse=True)
+row_count = 0
 
-with open(input_file, "r") as source:
+with open(FILE_INPUT, "r") as source:
     reader = csv.reader(source)
-    with open(output_file, "w", newline='') as result:
+    with open(FILE_OUTPUT, "w", newline='') as result:
         writer = csv.writer(result)
         for row in reader:
             row_count += 1
-            print('\r{0}'.format(row_count), end='')  # Print rows processed
-            for col_index in cols_to_remove:
-                del row[col_index]
+            print('\r{0}'.format(row_count), end='')
+            if row_count == 1:
+                row = ["id", "title", "year"]
+            else:
+                for col_index in cols_to_remove:
+                    del row[col_index]
             writer.writerow(row)
