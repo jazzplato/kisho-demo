@@ -8,6 +8,7 @@
       - curl
       - htop
       - wget
+      - telnet
       - net-tools
       - iptables
       - rsync

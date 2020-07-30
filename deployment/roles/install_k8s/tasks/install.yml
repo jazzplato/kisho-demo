@@ -23,9 +23,16 @@
     update_cache: true
 
 - name: change native cgroupdriver to systemd for docker
-  copy:
-    src: daemon.json
-    dest: /etc/docker/daemon.json
+  block:
+    - name: update the daemon.json for docker
+      copy:
+        src: daemon.json
+        dest: /etc/docker/daemon.json
+    
+    - name: restart the docker daemon to reload the config
+      systemd:
+        name: docker
+        state: reloaded
 
 - name: start and enable kubelet
   systemd:

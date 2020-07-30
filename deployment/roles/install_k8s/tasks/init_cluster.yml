@@ -1,12 +1,27 @@
 ---
 
+- name: set user list for k8s
+  set_fact:
+    k8s_users:
+      - "{{ ansible_user }}"
+      - "{{ k8s_user }}"
+      - root
+
 - name: create .kube directory
   become: yes
-  become_user: "{{ k8s_user }}"
+  become_user: "{{ item }}"
   file:
     path: $HOME/.kube
     state: directory
+    owner: "{{ item }}"
     mode: 0755
+  loop: "{{ k8s_users }}"
+
+- name: disable swap for k8s
+  command: swapoff -a
+
+- name: pull the config images
+  command: kubeadm config images pull
 
 - name: initialize the cluster
   shell: "kubeadm init --pod-network-cidr={{ k8s_network_cidr }} >> cluster_initialized.txt"
@@ -19,7 +34,8 @@
     src: /etc/kubernetes/admin.conf
     dest: $HOME/.kube/config
     remote_src: yes
-    owner: "{{ k8s_user }}"
+    owner: "{{ item }}"
+  loop: "{{ k8s_users }}"
 
 - name: install Pod network
   shell: "kubectl apply -f {{ k8s_flannel_src_url }} >> pod_network_setup.txt"

@@ -19,9 +19,7 @@
 
 - name: config the kubernetes master node
   become: yes
-  # import_tasks: init_cluster.yml
-  debug:
-    msg: ready to init a k8s cluster
+  import_tasks: init_cluster.yml
   when:
     - k8s_role is defined
     - k8s_role == "master"
