@@ -1,11 +1,14 @@
-from django.urls import path
-from rest_framework import routers
+from django.urls import path, include
 from . import views
+from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'movies', views.MovieViewSet)
+router.register(r'users', views.UserViewSet, basename="users")
+router.register(r'movies', views.MovieViewSet, basename="movies")
+router.register(r'ratings', views.MovieRatingViewSet, basename="ratings")
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', include(router.urls)),
+    path('welcome', views.welcome, name='welcome'),
+    path('rate', views.rate_movie, name='rate'),
 ]
