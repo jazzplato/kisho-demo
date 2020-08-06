@@ -72,14 +72,18 @@ WSGI_APPLICATION = 'kisho.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+DATABASE_HOST = os.environ.get('DATABASE_HOST', 'localhost')
+DATABASE_PORT = os.environ.get('DATABASE_PORT', '3306')
+DATABASE_USER = os.environ.get('DATABASE_USER', 'kisho')
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD', 'KishoKurokawa')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'KishoCinema',
-        'USER': 'kisho',
-        'PASSWORD': 'KishoKurokawa',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
         'OPTIONS': {
             'charset': 'utf8',
             'use_unicode': True,
@@ -88,14 +92,20 @@ DATABASES = {
 }
 
 if os.environ.get('ENABLE_CACHE') == 'YES':
+    REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+    REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
+    REDIS_KEY_PREFIX = os.environ.get('REDIS_KEY_PREFIX', 'kisho')
+    REDIS_LOCATION = os.environ.get(
+        'REDIS_LOCATION', 'redis://{HOST}:{PORT}/1'.format(HOST=REDIS_HOST,
+                                                           PORT=REDIS_PORT))
     CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://127.0.0.1:6379/1",
+            "LOCATION": REDIS_LOCATION,
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
             },
-            "KEY_PREFIX": "kisho"
+            "KEY_PREFIX": CACHE_KEY_PREFIX
         }
     }
     SESSION_ENGINE = "django.contrib.sessions.backends.cache"
