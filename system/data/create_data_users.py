@@ -10,6 +10,7 @@ from django.contrib.auth.hashers import make_password
 DIR_CURR = os.path.dirname(os.path.abspath(__file__))
 DIR_BASE = os.path.dirname(DIR_CURR)
 DIR_DJANGO = os.path.join(DIR_BASE, "django", "kisho")
+DIR_DB_DATA = os.path.join(DIR_BASE, "database", "data")
 
 # django password
 sys.path.append(DIR_DJANGO)
@@ -21,7 +22,7 @@ NUM_USERS = 10000
 # random strings
 LEN_USERNAME = 8
 LEN_PASSWORD = 16
-FILE_OUTPUT = os.path.join(DIR_CURR, "users.csv")
+FILE_OUTPUT = os.path.join(DIR_DB_DATA, "users.csv")
 CHOICE_USERNAME = string.ascii_letters
 CHOICE_PASSWORD = string.ascii_letters + string.digits
 

@@ -2,8 +2,10 @@ import os
 import csv
 
 DIR_CURR = os.path.dirname(os.path.abspath(__file__))
+DIR_BASE = os.path.dirname(DIR_CURR)
+DIR_DB_DATA = os.path.join(DIR_BASE, "database", "data")
 FILE_INPUT = os.path.join(DIR_CURR, "raw_movies.csv")
-FILE_OUTPUT = os.path.join(DIR_CURR, "movies.csv")
+FILE_OUTPUT = os.path.join(DIR_DB_DATA, "movies.csv")
 
 
 def main():
