@@ -145,7 +145,7 @@ CREATE TABLE `cinema_movie` (
   `year` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cinema_movie_title_year_72a6f5ae_uniq` (`title`,`year`)
-) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -158,8 +158,8 @@ CREATE TABLE `cinema_movierating` (
   `movie_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `cinema_movierating_user_id_movie_id_c478c449_uniq` (`user_id`,`movie_id`),
   KEY `cinema_movierating_movie_id_1acf1dc8_fk_cinema_movie_id` (`movie_id`),
-  KEY `cinema_movierating_user_id_faf17282_fk_auth_user_id` (`user_id`),
   CONSTRAINT `cinema_movierating_movie_id_1acf1dc8_fk_cinema_movie_id` FOREIGN KEY (`movie_id`) REFERENCES `cinema_movie` (`id`),
   CONSTRAINT `cinema_movierating_user_id_faf17282_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
