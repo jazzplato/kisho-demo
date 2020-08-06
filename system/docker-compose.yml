@@ -1,0 +1,36 @@
+version: '3'
+services:
+  kisho-nginx:
+    image: jazzplato/kisho-demo-cinema-nginx
+    build: nginx/
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/kisho_local.conf:/etc/nginx/conf.d/kisho.conf
+    depends_on:
+      - kisho-django
+  kisho-django:
+    image: jazzplato/kisho-demo-cinema-django
+    build: django/
+    depends_on:
+      - kisho-redis
+      - kisho-mysql
+    environment:
+      - ENABLE_CACHE=yes
+      - DATABASE_HOST=kisho-mysql
+      - REDIS_HOST=kisho-redis
+    command: >
+      sh -c "
+        python3 ./wait_for.py && \
+        gunicorn --bind 0.0.0.0:8080 kisho.wsgi:application"
+    ports:
+      - 8080:8080
+  kisho-mysql:
+    image: jazzplato/kisho-demo-cinema-mysql
+    build: database/
+    ports:
+      - 3306:3306
+  kisho-redis:
+    image: redis:6.0
+    ports:
+      - 6379:6379
