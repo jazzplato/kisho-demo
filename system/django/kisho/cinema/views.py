@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from .models import Movie, MovieRating
 from .serializers import UserSerializer, MovieSerializer, MovieRatingSerializer, RateRequestSerializer
 from .utils import calc_rating_factor
+from .decorators import check_cache
 
 
 # Create your views here.
@@ -50,6 +51,11 @@ def rate_movie(request, format=None):
     return Response(serializer.data)
 
 
+class MovieRatingViewSet(viewsets.ModelViewSet):
+    queryset = MovieRating.objects.all().order_by('-id')
+    serializer_class = MovieRatingSerializer
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-id')
     serializer_class = UserSerializer
@@ -59,7 +65,15 @@ class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all().order_by('-id')
     serializer_class = MovieSerializer
 
+    @check_cache
+    def list(self, request):
+        queryset = Movie.objects.all().order_by('-id')
+        serializer = MovieSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-class MovieRatingViewSet(viewsets.ModelViewSet):
-    queryset = MovieRating.objects.all().order_by('-id')
-    serializer_class = MovieRatingSerializer
+    @check_cache
+    def retrieve(self, request, pk=None):
+        queryset = Movie.objects.all().order_by('-id')
+        movie = get_object_or_404(queryset, pk=pk)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
