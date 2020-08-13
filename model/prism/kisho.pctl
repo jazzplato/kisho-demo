@@ -1,0 +1,4 @@
+const int x;
+
+// Probability of ending up in state x after 5 cycles?
+P=? [ F=5 s=x ]
