@@ -6,6 +6,12 @@ k8s_worker
 ansible_user = 
 k8s_user = kisho
 
+# k8s ports 
+port_nginx = 30000
+port_django = 30001
+port_mysql = 30002
+port_redis = 30003
+
 [k8s_master]
 kisho-master.andrew.cmu.edu
 
