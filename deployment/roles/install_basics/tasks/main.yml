@@ -12,4 +12,5 @@
       - net-tools
       - iptables
       - rsync
+      - python3-pip
     update_cache: yes
