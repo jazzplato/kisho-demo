@@ -1,0 +1,15 @@
+---
+
+- name: create mysql deployment
+  vars:
+    deployment_file: "{{ dir_k8s }}/mysql/deployment.yml"
+  k8s:
+    state: present
+    definition: "{{ lookup('template', '{{ deployment_file }}') }}"
+
+- name: create mysql service
+  vars:
+    service_file: "{{ dir_k8s }}/mysql/service.yml"
+  k8s:
+    state: present
+    definition: "{{ lookup('template', '{{ service_file }}') }}"
