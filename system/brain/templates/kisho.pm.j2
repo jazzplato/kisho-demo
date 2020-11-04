@@ -1,0 +1,20 @@
+dtmc
+
+// system states
+{%- for state in kisho.states.values() %}
+const int {{ state.name }} = {{ state.level }};
+{%- endfor %}
+
+module {{ kisho.name }}
+	// state of the system
+	s : [1..{{ kisho.states | length }}] init {{ kisho.curr_state_name }};
+{% for state_name, state in kisho.states.items() %}
+	[] s={{ state_name }} -> 
+	{%- for transition in state.transitions.values() %} 
+		{{ transition.prob }} : (s'={{ transition.name }}) 
+		{%- if not loop.last %}
+		+ 
+		{%- endif -%}
+	{%- endfor %};
+{% endfor %}
+endmodule

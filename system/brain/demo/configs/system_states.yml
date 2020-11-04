@@ -1,0 +1,41 @@
+---
+
+- name: Kisho
+  curr_state_name: IDLE
+  states:
+    - name: IDLE
+      level: 1
+      transitions:
+        - { name: IDLE, counter: 1 }
+        - { name: NORMAL, counter: 1 }
+    - name: NORMAL
+      level: 2
+      transitions:
+        - { name: IDLE, counter: 0.2 }
+        - { name: NORMAL, counter: 0.2 }
+        - { name: OVERLOADED, counter: 0.2 }
+        - { name: CRITICAL, counter: 0.2 }
+        - { name: FAILED, counter: 0.2 }
+    - name: OVERLOADED
+      level: 3
+      transitions:
+        - { name: NORMAL, counter: 0.25 }
+        - { name: OVERLOADED, counter: 0.25 }
+        - { name: CRITICAL, counter: 0.25 }
+        - { name: FAILED, counter: 0.25 }
+    - name: CRITICAL
+      level: 4
+      transitions:
+        - { name: NORMAL, counter: 0.25 }
+        - { name: OVERLOADED, counter: 0.25 }
+        - { name: CRITICAL, counter: 0.25 }
+        - { name: FAILED, counter: 0.25 }
+    - name: FAILED
+      level: 5
+      transitions:
+        - { name: IDLE, counter: 0.2 }
+        - { name: NORMAL, counter: 0.2 }
+        - { name: OVERLOADED, counter: 0.2 }
+        - { name: CRITICAL, counter: 0.2 }
+        - { name: FAILED, counter: 0.2 }
+      
