@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
+from utils import constants
 
 
 class KishoStateTransition:
@@ -32,11 +33,15 @@ class KishoState:
 
 
 class KishoModel:
-    def __init__(self, name, curr_state_name):
+    def __init__(self,
+                 name,
+                 curr_state_name,
+                 prediction_cycle=constants.DEFAULT_PREDICTION_CYCLE):
         self.name = name
         self.curr_state_name = curr_state_name
         self.states = {}
         self.history_states = [curr_state_name]
+        self.prediction_cycle = prediction_cycle
         # self.history_size = 100
 
     def add_state(self, state):
@@ -49,7 +54,8 @@ class KishoModel:
 
 def init_system_model(raw_system_states):
     system_model = KishoModel(raw_system_states.name,
-                              raw_system_states.curr_state_name)
+                              raw_system_states.curr_state_name,
+                              raw_system_states.prediction_cycle)
     for raw_state in raw_system_states.states:
         curr_state = KishoState(raw_state.name, raw_state.level)
         for transition in raw_state.transitions:
