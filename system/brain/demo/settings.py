@@ -19,5 +19,10 @@ FILE_SYSTEM_STATES = os.path.join(DIR_CONFIG,
 SYSTEM_NAME = DIR_CURR.split("/")[-1]
 SYSTEM_MODEL = init_system_model(parse_system_states(FILE_SYSTEM_STATES))
 
-DIR_MODEL = os.path.join(DIR_CURR, "models")
-FILE_PRISM_MODEL = os.path.join(DIR_MODEL, "kisho.pm")
+DIR_PRISM_MODEL = os.path.join(DIR_CURR, "models")
+FILE_PRISM_MODEL = os.path.join(DIR_PRISM_MODEL, "kisho.pm")
+
+DIR_PRISM_API = os.path.join(DIR_CURR, "prism-api")
+DIR_PRISM_API_BIN = os.path.join(DIR_PRISM_API, "bin")
+DIR_PRISM_API_SRC = os.path.join(DIR_PRISM_API, "src")
+FILE_PRISM_API = os.path.join(DIR_PRISM_API_SRC, "CheckKishoModel.java")
