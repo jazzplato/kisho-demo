@@ -1,0 +1,40 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kisho-django
+  namespace: kisho-cinema
+  labels:
+    app: kisho-django
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: kisho-django
+  template:
+    metadata:
+      labels:
+        app: kisho-django
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: kisho-django
+          image: jazzplato/kisho-demo-cinema-django:1.0.1
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: ENABLE_CACHE
+              value: "{{ django_enable_cache }}"
+            - name: DATABASE_HOST
+              value: service-mysql.kisho-cinema
+            - name: DATABASE_PORT
+              value: "{{ port_mysql | int }}"
+            - name: REDIS_HOST
+              value: service-redis.kisho-cinema
+            - name: REDIS_PORT
+              value: "{{ port_redis | int }}"
