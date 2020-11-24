@@ -11,6 +11,7 @@ sys.path.append(DIR_BASE)
 from utils import constants
 from utils.parsers import parse_system_states
 from utils.models import init_system_model
+from utils.render import render_prism_api
 
 DIR_CONFIG = os.path.join(DIR_CURR, constants.DIRNAME_CONFIGS)
 FILE_SYSTEM_STATES = os.path.join(DIR_CONFIG,
@@ -26,3 +27,6 @@ DIR_PRISM_API = os.path.join(DIR_CURR, "prism-api")
 DIR_PRISM_API_BIN = os.path.join(DIR_PRISM_API, "bin")
 DIR_PRISM_API_SRC = os.path.join(DIR_PRISM_API, "src")
 FILE_PRISM_API = os.path.join(DIR_PRISM_API_SRC, "CheckKishoModel.java")
+
+# render the java prism-api
+render_prism_api(SYSTEM_MODEL, FILE_PRISM_API)

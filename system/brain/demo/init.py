@@ -1,8 +1,11 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 import os
-from settings import SYSTEM_MODEL, FILE_PRISM_MODEL, FILE_PRISM_API
-from utils.render import render_prism_model, render_prism_api
+import asyncio
+from settings import SYSTEM_MODEL, FILE_PRISM_MODEL
+from utils.common import Config
+from utils.feedback_loop import feedback_loop
 
-render_prism_model(SYSTEM_MODEL, FILE_PRISM_MODEL)
-render_prism_api(SYSTEM_MODEL, FILE_PRISM_API)
+if __name__ == "__main__":
+    cfg = Config(SYSTEM_MODEL, FILE_PRISM_MODEL)
+    asyncio.run(feedback_loop(cfg))

@@ -8,6 +8,7 @@ CONFIG_FILENAME_SYSTEM_STATES = "system_states.yml"
 
 # default settings
 DEFAULT_PREDICTION_CYCLE = 10
+DEFAULT_FEEDBACK_CYCLE_INTERVAL = 5
 
 # jinja2 templates
 DIR_BASE_SRC = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
