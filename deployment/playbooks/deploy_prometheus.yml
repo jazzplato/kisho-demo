@@ -1,20 +1,15 @@
 ---
-- name: deploy kisho cinema
+- name: deploy prometheus
   hosts: k8s_master
-  become: yes
-  become_user: "{{ k8s_user }}"
   vars:
     dir_deployment: "{{ inventory_dir }}"
     dir_k8s: "{{ dir_deployment }}/kubernetes"
-    django_enable_cache: no
+    dir_k8s_prometheus: "{{ dir_k8s }}/monitoring/prometheus"
   pre_tasks:
     - name: ensure k8s module dependencies are installed.
       pip:
-        name: openshift
         state: present
+        name: openshift
   roles:
     - create_namespaces
-    - deploy_mysql
-    # - deploy_redis
-    - deploy_django
-    # - deploy_nginx
+    - deploy_prometheus
