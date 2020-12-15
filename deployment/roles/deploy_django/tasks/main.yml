@@ -7,16 +7,3 @@
     files:
       - deployment.yml
       - service.yml
-# - name: create django deployment
-#   vars:
-#     deployment_file: "{{ dir_k8s }}/django/deployment.yml"
-#   k8s:
-#     state: present
-#     definition: "{{ lookup('template', '{{ deployment_file }}') }}"
-
-# - name: create django service
-#   vars:
-#     service_file: "{{ dir_k8s }}/django/service.yml"
-#   k8s:
-#     state: present
-#     definition: "{{ lookup('template', '{{ service_file }}') }}"
