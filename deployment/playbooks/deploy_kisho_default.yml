@@ -18,4 +18,4 @@
     - deploy_mysql
     # - deploy_redis
     - deploy_django
-    # - deploy_nginx
+    - deploy_nginx

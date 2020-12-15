@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kisho-nginx
+  namespace: kisho-cinema
+  labels:
+    app: kisho-nginx
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: kisho-nginx
+  template:
+    metadata:
+      labels:
+        app: kisho-nginx
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: kisho-nginx
+          image: jazzplato/kisho-demo-cinema-nginx:1.0
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d/
+              readOnly: true
+              name: kisho-conf
+      volumes:
+        - name: kisho-conf
+          configMap:
+            name: kisho-nginx-conf
+            items:
+              - key: kisho-cinema.conf
+                path: kisho-cinema.conf

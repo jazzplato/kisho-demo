@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kisho-nginx-conf
+  namespace: kisho-cinema
+  labels:
+    app: kisho-nginx
+data:
+  kisho-cinema.conf: |
+    upstream django {
+        server service-django.kisho-cinema:8080;
+    }
+
+    server {
+        listen              80;
+        server_name         {{ server_name }};
+
+        # log config
+        access_log          /logs/access.log;
+        error_log           /logs/error.log;
+
+        # default redirection
+        location / {
+            proxy_pass_header   Set-Cookie;
+
+            proxy_set_header    Host               $host;
+            proxy_set_header    X-Real-IP          $remote_addr;
+            proxy_set_header    X-Forwarded-Proto  $scheme;
+            proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
+
+            proxy_pass http://django/;
+        }
+
+        location /static {
+            alias /static;
+            autoindex on;
+        }
+    }

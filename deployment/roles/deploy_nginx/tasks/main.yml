@@ -1,0 +1,10 @@
+---
+- name: deploy nginx to k8s cluster
+  include_role:
+    name: deploy_k8s
+  vars:
+    dir_config: "{{ dir_k8s_kisho }}/nginx"
+    files:
+      - config-map.yml
+      - deployment.yml
+      - service.yml
