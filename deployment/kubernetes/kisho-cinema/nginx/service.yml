@@ -2,16 +2,16 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: service-django
+  name: service-nginx
   namespace: kisho-cinema
   labels:
-    app: kisho-django
+    app: kisho-nginx
 spec:
   type: NodePort
   selector:
-    app: kisho-django
+    app: kisho-nginx
   ports:
     - protocol: TCP
-      port: 8080
-      nodePort: {{ port_django | int }}
+      port: 80
+      nodePort: {{ port_nginx | int }}
   externalTrafficPolicy: Local
