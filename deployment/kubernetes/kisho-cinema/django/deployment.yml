@@ -1,5 +1,4 @@
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +22,7 @@ spec:
         role: worker
       containers:
         - name: kisho-django
-          image: jazzplato/kisho-demo-cinema-django:1.0.1
+          image: jazzplato/kisho-demo-cinema-django:1.0.3
           ports:
             - name: http
               containerPort: 8080
