@@ -16,6 +16,7 @@ services:
       - kisho-redis
       - kisho-mysql
     environment:
+      - PAGE_SIZE=100
       - ENABLE_CACHE=yes
       - DATABASE_HOST=kisho-mysql
       - REDIS_HOST=kisho-redis

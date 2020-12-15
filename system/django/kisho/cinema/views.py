@@ -79,7 +79,11 @@ class MovieViewSet(viewsets.ModelViewSet):
     @check_cache
     def list(self, request):
         queryset = Movie.objects.all().order_by('-id')
-        serializer = MovieSerializer(queryset, many=True)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     @check_cache

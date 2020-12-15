@@ -7,7 +7,6 @@
     dir_deployment: "{{ inventory_dir }}"
     dir_k8s: "{{ dir_deployment }}/kubernetes"
     dir_k8s_kisho: "{{ dir_k8s }}/kisho-cinema"
-    django_enable_cache: no
   pre_tasks:
     - name: ensure k8s module dependencies are installed.
       pip:

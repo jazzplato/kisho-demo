@@ -1,0 +1,3 @@
+---
+django_page_size: 10
+django_enable_cache: no

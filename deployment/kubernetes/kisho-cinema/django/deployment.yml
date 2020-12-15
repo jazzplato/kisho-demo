@@ -22,18 +22,20 @@ spec:
         role: worker
       containers:
         - name: kisho-django
-          image: jazzplato/kisho-demo-cinema-django:1.0.3
+          image: jazzplato/kisho-demo-cinema-django:1.0.4
           ports:
             - name: http
               containerPort: 8080
           env:
-            - name: ENABLE_CACHE
-              value: "{{ django_enable_cache }}"
             - name: DATABASE_HOST
               value: service-mysql.kisho-cinema
             - name: DATABASE_PORT
-              value: "{{ port_mysql | int }}"
+              value: "3306"
             - name: REDIS_HOST
               value: service-redis.kisho-cinema
             - name: REDIS_PORT
-              value: "{{ port_redis | int }}"
+              value: "6379"
+            - name: ENABLE_CACHE
+              value: "{{ django_enable_cache }}"
+            - name: PAGE_SIZE
+              value: "{{ django_page_size | int }}"
