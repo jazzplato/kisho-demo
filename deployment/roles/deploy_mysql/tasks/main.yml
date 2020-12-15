@@ -1,15 +1,9 @@
 ---
-
-- name: create mysql deployment
+- name: deploy mysql to k8s cluster
+  include_role:
+    name: deploy_k8s
   vars:
-    deployment_file: "{{ dir_k8s }}/mysql/deployment.yml"
-  k8s:
-    state: present
-    definition: "{{ lookup('template', '{{ deployment_file }}') }}"
-
-- name: create mysql service
-  vars:
-    service_file: "{{ dir_k8s }}/mysql/service.yml"
-  k8s:
-    state: present
-    definition: "{{ lookup('template', '{{ service_file }}') }}"
+    dir_config: "{{ dir_k8s_kisho }}/mysql"
+    files:
+      - deployment.yml
+      - service.yml

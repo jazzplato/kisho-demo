@@ -1,0 +1,8 @@
+---
+- name: apply k8s deployment configs
+  vars:
+    config: "{{ dir_config }}/{{ item }}"
+  k8s:
+    state: present
+    definition: "{{ lookup('template', '{{ config }}') }}"
+  loop: "{{ files }}"

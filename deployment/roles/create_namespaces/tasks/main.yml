@@ -1,8 +1,8 @@
 ---
-
 - name: create k8s namespaces
+  include_role:
+    name: deploy_k8s
   vars:
-    namespaces_file: "{{ dir_k8s }}/namespaces.yml"
-  k8s:
-    state: present
-    definition: "{{ lookup('template', '{{ namespaces_file }}') }}"
+    dir_config: "{{ dir_k8s }}"
+    files:
+      - namespaces.yml
