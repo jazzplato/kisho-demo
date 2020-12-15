@@ -1,13 +1,12 @@
 ---
-- name: apply prometheus deployment donfigs
+- name: deploy prometheus to k8s cluster
+  include_role:
+    name: deploy_k8s
   vars:
-    config: "{{ dir_k8s_prometheus }}/{{ item }}"
-  k8s:
-    state: present
-    definition: "{{ lookup('template', '{{ config }}') }}"
-  loop:
-    - cluster-role.yml
-    - cluster-role-binding.yml
-    - config-map.yml
-    - deployment.yml
-    - service.yml
+    dir_config: "{{ dir_k8s_prometheus }}"
+    files:
+      - cluster-role.yml
+      - cluster-role-binding.yml
+      - config-map.yml
+      - deployment.yml
+      - service.yml
