@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.9.1
 
 # create and set working directory
 WORKDIR /django
@@ -19,8 +19,10 @@ RUN groupadd -r django && useradd -r -g django django
 RUN chown -R django .
 
 EXPOSE 8080
-HEALTHCHECK --interval=10m --timeout=5s\
+HEALTHCHECK --interval=10m --timeout=5s \
     CMD curl -f http://localhost:$PORT/cinema/health/ || exit 1
 
 USER django
-CMD gunicorn --bind 0.0.0.0:$PORT kisho.wsgi:application
+CMD gunicorn kisho.wsgi:application \
+    --bind 0.0.0.0:$PORT \
+    --timeout 300
