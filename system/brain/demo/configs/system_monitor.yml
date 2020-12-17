@@ -1,0 +1,3 @@
+---
+name: KishoCinema
+prometheus_url: http://kisho-worker.andrew.cmu.edu:31000/api/v1/query

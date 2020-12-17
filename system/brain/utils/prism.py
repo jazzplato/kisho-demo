@@ -37,6 +37,9 @@ class KishoModel:
                  name,
                  curr_state_name,
                  prediction_cycle=constants.DEFAULT_PREDICTION_CYCLE):
+        """
+        Construct an empty KishoModel object with no system states
+        """
         self.name = name
         self.curr_state_name = curr_state_name
         self.states = {}
@@ -44,22 +47,29 @@ class KishoModel:
         self.prediction_cycle = prediction_cycle
         # self.history_size = 100
 
+    def __init__(self, raw_system_states):
+        """
+        Construct an empty KishoModel object from parsed YAML config
+        """
+        self.name = raw_system_states.name
+        self.curr_state_name = raw_system_states.curr_state_name
+        self.states = {}
+        self.history_states = [raw_system_states.curr_state_name]
+        if hasattr(raw_system_states, "prediction_cycle"):
+            self.prediction_cycle = raw_system_states.prediction_cycle
+        else:
+            self.prediction_cycle = constants.DEFAULT_PREDICTION_CYCLE
+        # Add system states
+        for raw_state in raw_system_states.states:
+            curr_state = KishoState(raw_state.name, raw_state.level)
+            for transition in raw_state.transitions:
+                curr_state.add_transition(transition.name)
+            curr_state.update_transition_probs()
+            self.add_state(curr_state)
+
     def add_state(self, state):
         self.states[state.name] = state
 
     def update_model(self, curr_state_name):
         last_state = self.states[self.history_states[-1]]
         last_state.update_transition_probs(curr_state_name)
-
-
-def init_system_model(raw_system_states):
-    system_model = KishoModel(raw_system_states.name,
-                              raw_system_states.curr_state_name,
-                              raw_system_states.prediction_cycle)
-    for raw_state in raw_system_states.states:
-        curr_state = KishoState(raw_state.name, raw_state.level)
-        for transition in raw_state.transitions:
-            curr_state.add_transition(transition.name)
-        curr_state.update_transition_probs()
-        system_model.add_state(curr_state)
-    return system_model

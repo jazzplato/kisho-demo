@@ -29,7 +29,9 @@ async def feedback_loop(cfg):
 
 
 def monitor(cfg):
-    pass
+    for component in cfg.arch.components:
+        print(f"pod[{component.pod_name}]: "
+              f"cpu = {component.get_containers_cpu(cfg.prometheus_url)}")
 
 
 def analyze(cfg):

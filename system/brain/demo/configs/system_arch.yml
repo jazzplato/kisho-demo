@@ -1,0 +1,23 @@
+---
+name: KishoCinema
+namespace: kisho-cinema
+components:
+  - name: nginx
+    deployment_type: deployment
+    pod_name: kisho-nginx
+    container_name: kisho-nginx
+    scalable: true
+  - name: django
+    deployment_type: deployment
+    pod_name: kisho-django
+    container_name: kisho-django
+    scalable: true
+  - name: mysql
+    deployment_type: deployment
+    pod_name: kisho-mysql
+    container_name: kisho-mysql
+    scalable: false
+  # - name: redis
+  #   deployment_type: deployment
+  #   pod_name: kisho-redis
+  #   scalable: true

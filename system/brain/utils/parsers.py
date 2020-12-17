@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import yaml
-from utils.models import KishoModel, KishoState
 
 
 class RawData:
@@ -18,13 +17,13 @@ class RawData:
                 setattr(self, k, RawData(v) if isinstance(v, dict) else v)
 
 
-def parse_system_states(filepath):
+def parse_to_obj(filepath):
     """
-    Parse the system_state.yml to a Python object
+    Parse the YAML config file to a Python object
     """
     with open(filepath) as f:
         # use safe_load instead load
         data = yaml.safe_load(f)
         if not data:
             return None
-        return RawData(data[0])
+        return RawData(data)

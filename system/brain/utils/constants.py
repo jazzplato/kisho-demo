@@ -4,7 +4,9 @@ import os
 
 # user config dirnames and filenames
 DIRNAME_CONFIGS = "configs"
+CONFIG_FILENAME_SYSTEM_ARCH = "system_arch.yml"
 CONFIG_FILENAME_SYSTEM_STATES = "system_states.yml"
+CONFIG_FILENAME_SYSTEM_MONITOR = "system_monitor.yml"
 
 # default settings
 DEFAULT_PREDICTION_CYCLE = 10

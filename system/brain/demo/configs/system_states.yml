@@ -1,42 +1,40 @@
 ---
-
-- name: Kisho
-  curr_state_name: IDLE
-  prediction_cycle: 10
-  states:
-    - name: IDLE
-      level: 1
-      transitions:
-        - { name: IDLE }
-        - { name: NORMAL }
-    - name: NORMAL
-      level: 2
-      transitions:
-        - { name: IDLE }
-        - { name: NORMAL }
-        - { name: OVERLOADED }
-        - { name: CRITICAL }
-        - { name: FAILED }
-    - name: OVERLOADED
-      level: 3
-      transitions:
-        - { name: NORMAL }
-        - { name: OVERLOADED }
-        - { name: CRITICAL }
-        - { name: FAILED }
-    - name: CRITICAL
-      level: 4
-      transitions:
-        - { name: NORMAL }
-        - { name: OVERLOADED }
-        - { name: CRITICAL }
-        - { name: FAILED }
-    - name: FAILED
-      level: 5
-      transitions:
-        - { name: IDLE }
-        - { name: NORMAL }
-        - { name: OVERLOADED }
-        - { name: CRITICAL }
-        - { name: FAILED }
-      
+name: KishoCinema
+curr_state_name: IDLE
+prediction_cycle: 10
+states:
+  - name: IDLE
+    level: 1
+    transitions:
+      - { name: IDLE }
+      - { name: NORMAL }
+  - name: NORMAL
+    level: 2
+    transitions:
+      - { name: IDLE }
+      - { name: NORMAL }
+      - { name: OVERLOADED }
+      - { name: CRITICAL }
+      - { name: FAILED }
+  - name: OVERLOADED
+    level: 3
+    transitions:
+      - { name: NORMAL }
+      - { name: OVERLOADED }
+      - { name: CRITICAL }
+      - { name: FAILED }
+  - name: CRITICAL
+    level: 4
+    transitions:
+      - { name: NORMAL }
+      - { name: OVERLOADED }
+      - { name: CRITICAL }
+      - { name: FAILED }
+  - name: FAILED
+    level: 5
+    transitions:
+      - { name: IDLE }
+      - { name: NORMAL }
+      - { name: OVERLOADED }
+      - { name: CRITICAL }
+      - { name: FAILED }
